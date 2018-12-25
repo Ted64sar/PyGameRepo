@@ -34,3 +34,31 @@ while n < len(arg):
     n += 1
 d[arg[0][0]].sort()
 print(arg[0][0] + ': ' + ', '.join(d[arg[0][0]]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if k >= 3:
+        if i % 3 == 2:
+            color = (255, 0, 0)
+        if i % 3 == 1:
+            color = (0, 255, 0)
+        if i % 3 == 0:
+            color = (0, 0, 255)
+    elif k == 2:
+        if i == 0:
+            color = (0, 255, 0)
+        else:
+            color = (255, 0, 0)
+    else:
+        color = (255, 0, 0)
+
