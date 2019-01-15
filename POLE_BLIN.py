@@ -29,19 +29,19 @@ class Board:
     def render(self):
         for i in range(self.height):
             for j in range(self.width):
-                Rect = ((j * self.cell_size + self.left, i * self.cell_size + self.top), (self.cell_size, self.cell_size))
-                # Rect1 = ((j * self.cell_size + self.left + 1, i * self.cell_size + self.top + 1), (self.cell_size - 2, self.cell_size - 2))
+                Rect = (
+                (j * self.cell_size + self.left, i * self.cell_size + self.top), (self.cell_size, self.cell_size))
+                Rect1 = ((j * self.cell_size + self.left + 1, i * self.cell_size + self.top + 1),
+                         (self.cell_size - 2, self.cell_size - 2))
                 c = [(0, 0, 0), (255, 0, 0), (0, 0, 255)]
                 pygame.draw.rect(screen, (255, 255, 255), Rect, 1)
-                if self.board[i][j] == 1:
-                    pygame.draw.line()
-                    # pygame.draw.rect(screen, c[self.board[i][j]], Rect1, 0)
+                pygame.draw.rect(screen, c[self.board[i][j]], Rect1, 0)
 
     def on_click(self, cell_coords):
         self.board[cell_coords[0]][cell_coords[1]] = (self.board[cell_coords[0]][cell_coords[1]] + 1) % 3
         '''
         print(cell_coords)
-        
+
         for i in range(self.width):
             self.board[cell_coords[0]][i] = (self.board[cell_coords[0]][i] + 1) % 2
         for j in range(self.height):
