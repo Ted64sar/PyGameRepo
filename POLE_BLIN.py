@@ -1,12 +1,17 @@
 import pygame
-
+import random
 
 class Board:
     # создание поля
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.board = [[0] * width for _ in range(height)]
+        self.board = []
+        for i in range(height):
+            self.board.append([])
+            for j in range(width):
+                a = random.randint(0, 1)
+                self.board[i].append(a)
         # значения по умолчанию
         self.left = 10
         self.top = 10
@@ -29,24 +34,21 @@ class Board:
     def render(self):
         for i in range(self.height):
             for j in range(self.width):
-                Rect = (
-                (j * self.cell_size + self.left, i * self.cell_size + self.top), (self.cell_size, self.cell_size))
-                Rect1 = ((j * self.cell_size + self.left + 1, i * self.cell_size + self.top + 1),
-                         (self.cell_size - 2, self.cell_size - 2))
-                c = [(0, 0, 0), (255, 0, 0), (0, 0, 255)]
+                Rect = ((j * self.cell_size + self.left, i * self.cell_size + self.top), (self.cell_size, self.cell_size))
+                Rect1 = ((j * self.cell_size + self.left + 1, i * self.cell_size + self.top + 1), (self.cell_size - 2, self.cell_size - 2))
+                c = [(255, 0, 0), (0, 255, 0)]
                 pygame.draw.rect(screen, (255, 255, 255), Rect, 1)
-                pygame.draw.rect(screen, c[self.board[i][j]], Rect1, 0)
+                pygame.draw.ellipse(screen, c[self.board[i][j]], Rect1, 0)
 
     def on_click(self, cell_coords):
+        '''
         self.board[cell_coords[0]][cell_coords[1]] = (self.board[cell_coords[0]][cell_coords[1]] + 1) % 3
-        '''
         print(cell_coords)
-
-        for i in range(self.width):
-            self.board[cell_coords[0]][i] = (self.board[cell_coords[0]][i] + 1) % 2
-        for j in range(self.height):
-            self.board[j][cell_coords[1]] = (self.board[j][cell_coords[1]] + 1) % 2
         '''
+        for i in range(self.width):
+            self.board[cell_coords[0]][i] = self.board[cell_coords[0]][cell_coords[1]]
+        for j in range(self.height):
+            self.board[j][cell_coords[1]] = self.board[cell_coords[0]][cell_coords[1]]
 
     def get_click(self, mouse_pos):
         cell = self.get_cell(mouse_pos)
